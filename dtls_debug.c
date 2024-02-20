@@ -31,7 +31,9 @@
 #include <stdio.h>
 
 #ifdef HAVE_ARPA_INET_H
+#ifndef WITH_ZEPHYR
 #include <arpa/inet.h>
+#endif
 #endif
 
 #include <string.h>
