@@ -23,14 +23,17 @@
 #include "tinydtls.h"
 #include "dtls_prng.h"
 
-int
-dtls_prng(unsigned char *buf, size_t len) {
-  sys_csrand_get(buf, len);
-  return len;
+int dtls_prng(unsigned char *buf, size_t len)
+{
+#if defined(CONFIG_HAS_ENTROPY_DRIVER)
+	sys_csrand_get(buf, len);
+#else
+	sys_rand_get(buf, len);
+#endif
+	return len;
 }
 
-void
-dtls_prng_init(unsigned seed) {
-  (void) seed;
+void dtls_prng_init(unsigned seed)
+{
+	(void)seed;
 }
-
